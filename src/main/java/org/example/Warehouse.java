@@ -3,24 +3,31 @@ package org.example;
 import java.util.ArrayList;
 
 public class Warehouse {
-    private int id;
+    private int warehouseId;
     private String location;
-    private ArrayList<Product> products;
+    private ArrayList<Product> products = new ArrayList<>();
 
-    public Warehouse(int id, String location) {
-        this.id = id;
+    public Warehouse(String location){
+        setLocation(location);
+    }
+
+    public Warehouse(int warehouseId, String location) {
+        this.warehouseId = warehouseId;
         setLocation(location);
 
-        products = new ArrayList<>();
     }
 
-    public int getId() {
-        return id;
+    public int getWarehouseId() {
+        return warehouseId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setWarehouseId(int warehouseId) {
+        if (warehouseId < 0){
+            throw new IllegalArgumentException("Warehouse ID cannot be negative");
+        }
+        this.warehouseId = warehouseId;
     }
+
 
     public String getLocation() {
         return location;
@@ -51,31 +58,42 @@ public class Warehouse {
     /**
      * Removes one product with the specified id
      *
-     * @param id The product id to remove
+     * @param productId The product id to remove
      */
-    public void removeProductById(int id) {
+    public void removeProductById(int productId) {
         // remove => id:1
         // id:1, name:iphone <--
         // id:2 name:juice
         // id:1 name:iphone
 
         // Loop over every product
-        for (int i = 0; i < products.size(); i++) {
+        int index = getIndexOfFirstProductById(productId);
+        products.remove(index);
 
-            // Save the product to local variable
-            Product product = products.get(i);
-
-            // If current products id == id to remove
-            if (product.getId() == id) {
-
-                // Remove product
-                products.remove(i);
-
-                // Exit loop and method
-                return;
-            }
-        }
     }
+        private int getIndexOfFirstProductById(int productId) {
+            for (int i = 0; i < products.size(); i++) {
 
+                // Save the product to local variable
+                Product product = products.get(i);
+
+                // If current products id == id to remove
+                if (product.getProductId() == warehouseId) {
+
+                    // Exit loop and method
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+    @Override
+    public String toString() {
+        return "Warehouse{" +
+                "warehouseId=" + warehouseId +
+                ", location='" + location + '\'' +
+                ", products count=" + products.size() +
+                '}';
+    }
 }
 

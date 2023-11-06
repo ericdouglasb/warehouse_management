@@ -1,34 +1,32 @@
 package org.example;
 
-import java.util.Currency;
-
 public class Product {
-    private int id;
-    private String name;
+    private int productId;
+    private String productName;
     private int price; // TODO: Change to currency
     private String description;
 
-    public Product(int id, String name, int price, String description) {
-        this.id = id;
-        this.name = name;
+    public Product(int productId, String productName, int price, String description) {
+        this.productId = productId;
+        this.productName = productName;
         this.price = price;
         this.description = description;
     }
 
-    public int getId() {
-        return id;
+    public int getProductId() {
+        return productId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.productId = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getPrice() {
@@ -50,8 +48,8 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "productId=" + productId +
+                ", name='" + productName + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 '}';

@@ -1,10 +1,6 @@
 import org.example.Product;
 import org.example.Warehouse;
 import org.junit.Test;
-import org.junit.Test.*;
-import org.junit.Assert.*;
-
-
 
 
 public class WarehouseTests {
@@ -35,7 +31,7 @@ public class WarehouseTests {
         warehouse.addProduct(product);
 
         assert warehouse.getAllProducts().size() == 1;
-        assert warehouse.getAllProducts().getFirst().getId() == 1;
+        assert warehouse.getAllProducts().getFirst().getProductId() == 1;
     }
 
 
@@ -57,7 +53,7 @@ public class WarehouseTests {
         warehouse.removeProductById(1);
 
         assert warehouse.getAllProducts().size() == 2;
-        assert warehouse.getAllProducts().getFirst().getId() == 2;
+        assert warehouse.getAllProducts().getFirst().getProductId() == 2;
 
     }
 
