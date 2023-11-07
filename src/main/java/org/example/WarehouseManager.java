@@ -22,5 +22,10 @@ public class WarehouseManager extends DataObjectManager<Warehouse> {
     }
 
 
+    public void removeProductFromWarehouse(int productId, int warehouseId) {
+        Warehouse warehouse = getObjectById(warehouseId);
+
+        warehouse.removeProductById(productId);
+    }
 }
 

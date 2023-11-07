@@ -71,7 +71,8 @@ public class Main {
                         "2. Add warehouse\n" +
                         "3. Add product\n" +
                         "4. Add product to warehouse\n" +
-                        "Print everything\n" +
+                        "5. Print everything\n" +
+                        "6. Remove product from warehouse\n" +
                         "0. Exit\n" +
                         "Select");
 
@@ -102,6 +103,9 @@ public class Main {
             case 5:
                 printEverything(warehouseManager);
                 break;
+            case 6:
+                removeProductFromWarehouse(warehouseManager, productManager);
+                break;
             case 0:
                 stopRunning();
                 break;
@@ -111,12 +115,20 @@ public class Main {
         }
     }
 
+    private static void removeProductFromWarehouse(WarehouseManager warehouseManager, ProductManager productManager) {
+
+        int productId = getNumberinput("Enter product ID: ");
+        int warehouseId = getNumberinput("Enter warehouse ID: ");
+
+        warehouseManager.removeProductFromWarehouse(productId, warehouseId);
+    }
+
     private static void printEverything(WarehouseManager warehouseManager) {
         ArrayList<Warehouse> warehouses = warehouseManager.getAllObjects();
 
         for (var warehouse: warehouses) {
             ArrayList<Product> products = warehouse.getAllProducts();
-            System.out.println(warehouse.getLocation());
+            System.out.println(warehouse);
             printProducts(products);
             System.out.println("---");
 
