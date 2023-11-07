@@ -4,6 +4,7 @@ import org.example.data_objects.Product;
 import org.example.data_objects.Warehouse;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -120,7 +121,15 @@ public class Main {
         int productId = getNumberinput("Enter product ID: ");
         int warehouseId = getNumberinput("Enter warehouse ID: ");
 
-        warehouseManager.removeProductFromWarehouse(productId, warehouseId);
+
+        try {
+            warehouseManager.removeProductFromWarehouse(productId, warehouseId);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Invalid product ID");
+        }
+        catch (NoSuchElementException e){
+            System.out.println("Invalid warehouse ID");
+        }
     }
 
     private static void printEverything(WarehouseManager warehouseManager) {
