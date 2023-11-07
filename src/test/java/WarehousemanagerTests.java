@@ -1,5 +1,5 @@
-import org.example.Product;
-import org.example.Warehouse;
+import org.example.data_objects.Product;
+import org.example.data_objects.Warehouse;
 import org.example.WarehouseManager;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,21 +11,21 @@ public class WarehousemanagerTests {
 
         var warehouse = new Warehouse(1,"kista");
 
-        warehouseManager.addNewWarehouse(warehouse);
+        warehouseManager.addNewObject(warehouse);
 
-        assert warehouseManager.getAllWarehouses().size() == 1;
+        Assert.assertEquals(1, warehouseManager.getAllObjects().size());
     }
     @Test
     public void testAddProductToWarehouse(){
         var warehouseManager = new WarehouseManager();
         var warehouse = new Warehouse(1,"kista");
         var product = new Product(1,"iphone",10,"An exclusive phone");
-        warehouseManager.addNewWarehouse(warehouse);
+        warehouseManager.addNewObject(warehouse);
         warehouseManager.addProductToWarehouse(1,product);
 
-        warehouse = warehouseManager.getWarehouseById(1);
+        warehouse = warehouseManager.getObjectById(1);
 
-        assert warehouse.getAllProducts().size() == 1;
+        Assert.assertEquals(1,warehouse.getAllProducts().size());
 
     }
     @Test
@@ -34,12 +34,12 @@ public class WarehousemanagerTests {
         var warehouse1 = new Warehouse(1,"Sergelstorg");
         var warehouse2 = new Warehouse("Falun");
 
-        warehouseManager.addNewWarehouse(warehouse1);
-        warehouseManager.addNewWarehouse(warehouse2);
+        warehouseManager.addNewObject(warehouse1);
+        warehouseManager.addNewObject(warehouse2);
 
 
-        Assert.assertEquals(1, warehouse1.getWarehouseId());
-        Assert.assertEquals(2, warehouse2.getWarehouseId());
+        Assert.assertEquals(1, warehouse1.getId());
+        Assert.assertEquals(2, warehouse2.getId());
 
     }
 
@@ -50,12 +50,12 @@ public class WarehousemanagerTests {
         var warehouse1 = new Warehouse(200,"Sergelstorg");
         var warehouse2 = new Warehouse("Falun");
 
-        warehouseManager.addNewWarehouse(warehouse1);
-        warehouseManager.addNewWarehouse(warehouse2);
+        warehouseManager.addNewObject(warehouse1);
+        warehouseManager.addNewObject(warehouse2);
 
 
-        Assert.assertEquals(200, warehouse1.getWarehouseId());
-        Assert.assertEquals(201, warehouse2.getWarehouseId());
+        Assert.assertEquals(200, warehouse1.getId());
+        Assert.assertEquals(201, warehouse2.getId());
 
     }
 }
