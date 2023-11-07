@@ -8,6 +8,7 @@ import java.util.Scanner;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
+    private static boolean running = true;
 
 
     public static void main(String[] args) {
@@ -15,12 +16,29 @@ public class Main {
 
         addInitialWarehouses(warehouseManager);
 
-        while (true) {
+        while (running) {
             int selection = getMainMenuSelection();
 
             handleMenuSelection(selection, warehouseManager);
 
         }
+    }
+
+    /**
+     * Adds a few warehouses to the warehouse manager
+     *
+     * @param warehouseManager The warehouse manager to add warehouses to
+     */
+
+    private static void addInitialWarehouses(WarehouseManager warehouseManager) {
+        // Add initial warehouses
+        Warehouse kista = new Warehouse(1,"Kista");
+        Warehouse gothenburg = new Warehouse(2, "Göteborg");
+        Warehouse stockholm = new Warehouse(3, "Stockholm");
+
+        warehouseManager.addNewWarehouse(kista);
+        warehouseManager.addNewWarehouse(gothenburg);
+        warehouseManager.addNewWarehouse(stockholm);
     }
 
 
@@ -38,6 +56,7 @@ public class Main {
                         "2. Add warehouse\n" +
                         "3. Add product\n" +
                         "4. Add product to warehouse\n" +
+                        "0. Exit\n" +
                         "Select");
 
                String input = scanner.nextLine();
@@ -57,18 +76,18 @@ public class Main {
                 break;
             case 2:
                 addWarehouseToManager(warehouseManager);
+                break;
+            case 0:
+                stopRunning();
+                break;
             default:
                 System.out.println("Invalid menu selection");
                 break;
         }
     }
 
-    private static void addWarehouseToManager(WarehouseManager warehouseManager) {
-        Warehouse newWarehouse = new Warehouse("Sergelstorg");
-        warehouseManager.addNewWarehouse(newWarehouse);
-        System.out.println(newWarehouse);
 
-    }
+
 
     /**
      * Prints all warehouses of the warehouse manager
@@ -95,21 +114,26 @@ public class Main {
             System.out.println(warehouse);
         }
     }
+    private static void addWarehouseToManager(WarehouseManager warehouseManager) {
+        Warehouse newWarehouse = getWarehouseFromUserInput();
 
-    /**
-     * Adds a few warehouses to the warehouse manager
-     *
-     * @param warehouseManager The warehouse manager to add warehouses to
-     */
+        warehouseManager.addNewWarehouse(newWarehouse);
 
-    private static void addInitialWarehouses(WarehouseManager warehouseManager) {
-        // Add initial warehouses
-        Warehouse kista = new Warehouse(1,"Kista");
-        Warehouse gothenburg = new Warehouse(2, "Göteborg");
-        Warehouse stockholm = new Warehouse(3, "Stockholm");
+        System.out.println("Warehouse added successfully");
 
-        warehouseManager.addNewWarehouse(kista);
-        warehouseManager.addNewWarehouse(gothenburg);
-        warehouseManager.addNewWarehouse(stockholm);
     }
+
+    private static Warehouse getWarehouseFromUserInput() {
+        System.out.print("Input location");
+        String location = scanner.nextLine();
+
+        return new Warehouse(location);
+    }
+
+    private static void stopRunning(){
+        running = false;
+        System.out.println("Program will stop now.\n" +
+                "Have a great day!");
+    }
+
 }
